@@ -4,7 +4,8 @@ Turn a designed letterhead PDF into a usable Word template.
 
 Drop in a brand page. Paper rasterizes the artwork, finds a safe typing band, and packages it as `.docx` / `.dotx` — letterhead art stays faithful, body stays empty and editable.
 
-**Live:** [paper.tentacore.xyz](https://paper.tentacore.xyz)
+**Live:** [paper-web-production.up.railway.app](https://paper-web-production.up.railway.app) · custom domain `paper.tentacore.xyz` pending DNS (see [DEPLOY.md](DEPLOY.md))
+
 
 A side project by [Tentacore](https://tentacore.xyz).
 
