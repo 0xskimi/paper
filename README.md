@@ -32,6 +32,9 @@ npm run build
 npm run preview
 ```
 
-## Note
+## Hosting note
 
-This repo is public for portfolio purposes. All rights reserved — not licensed for reuse or redistribution.
+Production frontend is intended for **Vercel** (`paper.tentacore.xyz`), with the Python worker on **Railway** (`api.paper.tentacore.xyz`).
+
+If Vercel CLI auth isn’t available locally, the repo also includes a root `Dockerfile` so the static app can be served from Railway as a temporary alternative. Prefer Vercel for parity with Squeeze once logged in.
+

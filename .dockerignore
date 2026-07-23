@@ -1,0 +1,6 @@
+node_modules
+dist
+worker/.venv
+worker/jobs
+.git
+.DS_Store
