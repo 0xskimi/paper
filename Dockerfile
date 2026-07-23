@@ -5,7 +5,7 @@ RUN npm ci
 COPY index.html vite.config.ts tsconfig.json ./
 COPY public ./public
 COPY src ./src
-ARG VITE_API_BASE=https://api.paper.tentacore.xyz
+ARG VITE_API_BASE=https://paper-api-production-8e2c.up.railway.app
 ENV VITE_API_BASE=$VITE_API_BASE
 RUN npm run build
 

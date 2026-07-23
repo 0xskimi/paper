@@ -29,7 +29,9 @@ app = FastAPI(title="Paper", version="0.1.0")
 
 CORS_ORIGINS = [
     "https://paper.tentacore.xyz",
+    "https://paper-web-production.up.railway.app",
     "https://tentacore.xyz",
+    "https://www.tentacore.xyz",
     "https://paper-api-production-8e2c.up.railway.app",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
