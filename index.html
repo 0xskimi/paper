@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper</title>
+  <meta name="description" content="Turn a designed letterhead into a usable Word template. Artwork stays faithful. Body stays editable.">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
+  <script>
+    (function () {
+      const stored = localStorage.getItem('paper-theme');
+      const theme = stored === 'light' || stored === 'dark'
+        ? stored
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body id="top">
+  <nav class="navbar">
+    <a href="#top" class="wordmark" aria-label="Paper home">
+      <svg class="wordmark-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 3.75A2.25 2.25 0 0 1 9.75 1.5h4.5A2.25 2.25 0 0 1 16.5 3.75v.75h.75A2.25 2.25 0 0 1 19.5 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-.75v.75a2.25 2.25 0 0 1-2.25 2.25h-4.5a2.25 2.25 0 0 1-2.25-2.25v-.75h-.75A2.25 2.25 0 0 1 4.5 17.25V6.75A2.25 2.25 0 0 1 6.75 4.5h.75v-.75Zm1.5.75v-.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v.75h-6Zm9 2.25a.75.75 0 0 0-.75-.75h-10.5a.75.75 0 0 0-.75.75v10.5c0 .414.336.75.75.75h10.5a.75.75 0 0 0 .75-.75V6.75Zm-9.75 12v.75c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.75h-6ZM9 9.75A.75.75 0 0 1 9.75 9h4.5a.75.75 0 0 1 0 1.5h-4.5A.75.75 0 0 1 9 9.75Zm0 3A.75.75 0 0 1 9.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5A.75.75 0 0 1 9 12.75Zm0 3A.75.75 0 0 1 9.75 15h2.5a.75.75 0 0 1 0 1.5h-2.5A.75.75 0 0 1 9 15.75Z" fill="currentColor"/>
+      </svg>
+      <span class="wordmark-text">paper</span>
+    </a>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+      <i data-lucide="moon" class="theme-icon theme-icon--moon"></i>
+      <i data-lucide="sun" class="theme-icon theme-icon--sun"></i>
+    </button>
+  </nav>
+
+  <main class="stage">
+    <header class="intro" id="intro">
+      <h1 class="headline">Turn letterhead into a Word template.</h1>
+      <p class="subhead">Drop in a designed PDF or PNG. Paper keeps the artwork exact and leaves a clean typing area — then gives you a real <code>.dotx</code> you can open in Word.</p>
+    </header>
+
+    <section class="workspace" id="workspace">
+      <div id="upload-panel">
+        <label class="dropzone" id="dropzone" for="file-input">
+          <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/*" hidden>
+          <div class="dropzone-inner">
+            <span class="dropzone-icon" aria-hidden="true">
+              <i data-lucide="file-up"></i>
+            </span>
+            <p class="dropzone-title">Drop letterhead here</p>
+            <p class="dropzone-sub">PDF or PNG · A4 or Letter</p>
+            <p class="dropzone-note">Up to 25MB</p>
+          </div>
+        </label>
+      </div>
+
+      <div id="process-panel" hidden>
+        <div class="panel">
+          <p class="panel-kicker" id="process-filename">Working…</p>
+          <ul class="steps" id="process-steps"></ul>
+        </div>
+      </div>
+
+      <div id="review-panel" hidden>
+        <div class="review-grid">
+          <figure class="preview-card">
+            <figcaption>Original</figcaption>
+            <div class="preview-frame">
+              <img id="preview-original" alt="Original letterhead preview">
+              <div class="margin-guide" id="margin-guide" aria-hidden="true"></div>
+            </div>
+          </figure>
+          <div class="review-side">
+            <div class="panel">
+              <p class="panel-title">Detections</p>
+              <ul class="checklist" id="checklist"></ul>
+            </div>
+
+            <div class="panel">
+              <p class="panel-title">Adjust</p>
+              <div class="controls">
+                <label class="control">
+                  <span>Top margin</span>
+                  <div class="control-row">
+                    <input type="range" id="margin-top" min="20" max="90" step="1">
+                    <output id="margin-top-out"></output>
+                  </div>
+                </label>
+                <label class="control">
+                  <span>Bottom margin</span>
+                  <div class="control-row">
+                    <input type="range" id="margin-bottom" min="20" max="90" step="1">
+                    <output id="margin-bottom-out"></output>
+                  </div>
+                </label>
+                <label class="control">
+                  <span>Side margins</span>
+                  <div class="control-row">
+                    <input type="range" id="margin-side" min="10" max="40" step="1">
+                    <output id="margin-side-out"></output>
+                  </div>
+                </label>
+                <label class="control">
+                  <span>Paper</span>
+                  <select id="paper-select">
+                    <option value="a4">A4</option>
+                    <option value="letter">Letter</option>
+                  </select>
+                </label>
+                <label class="control">
+                  <span>Body font</span>
+                  <select id="font-select">
+                    <option value="Calibri">Calibri</option>
+                    <option value="Aptos">Aptos</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                  </select>
+                </label>
+              </div>
+              <button type="button" class="btn btn-secondary" id="rebuild-btn">Apply adjustments</button>
+            </div>
+
+            <div class="export-row">
+              <a class="btn btn-primary" id="download-dotx" href="#" download>
+                <i data-lucide="download"></i>
+                Download .dotx
+              </a>
+              <a class="btn btn-ghost" id="download-docx" href="#" download>
+                .docx
+              </a>
+              <button type="button" class="btn btn-ghost" id="reset-btn">Start over</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="error-banner" id="error-banner" hidden></p>
+
+      <div class="tip-stand" id="tip-stand">
+        <div class="tip-wrap">
+          <button type="button" class="tip-trigger" id="tip-trigger" aria-expanded="false" aria-controls="tip-popover">
+            <i data-lucide="circle-dollar-sign"></i>
+            <span>Tip USDC</span>
+          </button>
+          <div class="tip-popover" id="tip-popover" hidden>
+            <canvas id="tip-qr" class="tip-qr" aria-hidden="true"></canvas>
+            <p class="tip-label">USDC on Solana</p>
+            <p class="tip-address" id="tip-address"></p>
+            <button type="button" class="tip-copy" id="tip-copy">Copy address</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="footer-year">&copy; 2026 Paper</span>
+    <a href="https://tentacore.xyz" class="footer-link">A Tentacore project</a>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

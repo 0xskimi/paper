@@ -1,0 +1,5 @@
+# Ignore local venv; image installs deps itself
+.venv/
+jobs/
+__pycache__/
+*.pyc
