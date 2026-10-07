@@ -41,20 +41,33 @@
       <p class="subhead">Drop in a designed PDF or PNG. Paper keeps the artwork exact and leaves a clean typing area, then gives you a real <code>.dotx</code> you can open in Word.</p>
     </header>
 
-    <ol class="flow" aria-label="How Paper works">
-      <li class="flow-step">
-        <span class="flow-icon"><i data-lucide="file-image"></i></span>
-        <span class="flow-text"><span class="flow-title">Your letterhead</span><span class="flow-sub">PDF or PNG</span></span>
+    <ol class="sheets" aria-label="How Paper works">
+      <li class="sheet-step">
+        <div class="sheet" aria-hidden="true">
+          <span class="sheet-head"><span class="sheet-logo"></span><span class="sheet-bar"></span></span>
+          <span class="sheet-foot"></span>
+        </div>
+        <p class="sheet-title">Your design</p>
+        <p class="sheet-sub">PDF or PNG</p>
       </li>
-      <li class="flow-link" aria-hidden="true"><span class="flow-pulse"></span></li>
-      <li class="flow-step">
-        <span class="flow-icon"><i data-lucide="scan-line"></i></span>
-        <span class="flow-text"><span class="flow-title">Paper reads it</span><span class="flow-sub">Artwork kept, body cleared</span></span>
+      <li class="sheet-step">
+        <div class="sheet sheet--mapped" aria-hidden="true">
+          <span class="sheet-head"><span class="sheet-logo"></span><span class="sheet-bar"></span></span>
+          <span class="sheet-area"></span>
+          <span class="sheet-foot"></span>
+        </div>
+        <p class="sheet-title">Paper maps it</p>
+        <p class="sheet-sub">Body cleared</p>
       </li>
-      <li class="flow-link" aria-hidden="true"><span class="flow-pulse"></span></li>
-      <li class="flow-step flow-step--end">
-        <span class="flow-icon"><i data-lucide="file-type"></i></span>
-        <span class="flow-text"><span class="flow-title">Word template</span><span class="flow-sub">.dotx and .docx</span></span>
+      <li class="sheet-step">
+        <div class="sheet sheet--typed" aria-hidden="true">
+          <span class="sheet-head"><span class="sheet-logo"></span><span class="sheet-bar"></span></span>
+          <span class="sheet-lines"><span></span><span></span><span></span><span></span></span>
+          <span class="sheet-foot"></span>
+          <span class="sheet-badge">.dotx</span>
+        </div>
+        <p class="sheet-title">You type</p>
+        <p class="sheet-sub">Right in Word</p>
       </li>
     </ol>
 

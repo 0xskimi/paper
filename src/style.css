@@ -1,6 +1,6 @@
 :root {
   --font-sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --max-width: 920px;
+  --max-width: 560px;
   --radius: 10px;
 
   --bg: #fafaf8;
@@ -151,100 +151,169 @@ html[data-theme="dark"] .theme-icon--sun { display: block; }
   line-height: 1.55;
 }
 
-/* How it works strip */
+/* How it works: three tiny letterhead pages */
 
-.flow {
+.sheets {
   list-style: none;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   margin-bottom: 16px;
-}
-
-.flow-step {
-  flex: 1 1 0;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
+  padding: 20px 8px 16px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius);
+  counter-reset: sheet;
 }
 
-.flow-step--end {
-  border-color: var(--accent);
-}
-
-.flow-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 7px;
-  background: rgba(196, 92, 38, 0.1);
-  color: var(--accent);
-  flex-shrink: 0;
-}
-
-.flow-icon svg {
-  width: 16px;
-  height: 16px;
-}
-
-.flow-text {
+.sheet-step {
+  position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 0;
+  align-items: center;
+  text-align: center;
+  counter-increment: sheet;
 }
 
-.flow-title {
+.sheet-step + .sheet-step::before {
+  content: "";
+  position: absolute;
+  top: 36px;
+  left: -8px;
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid var(--border-strong);
+  border-right: 1.5px solid var(--border-strong);
+  transform: rotate(45deg);
+}
+
+.sheet {
+  position: relative;
+  width: 54px;
+  aspect-ratio: 210 / 297;
+  margin-bottom: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 var(--border), 3px 3px 0 -1px var(--surface-muted), 3px 3px 0 0 var(--border);
+}
+
+.sheet-head {
+  position: absolute;
+  top: 7px;
+  left: 6px;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sheet-logo {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.sheet-bar {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border-strong);
+}
+
+.sheet-foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  height: 3px;
+  background: var(--accent);
+  opacity: 0.75;
+}
+
+.sheet-area {
+  position: absolute;
+  top: 20px;
+  bottom: 14px;
+  left: 6px;
+  right: 6px;
+  border: 1px dashed var(--accent);
+  border-radius: 1px;
+  background: rgba(196, 92, 38, 0.07);
+  animation: sheet-breathe 2.4s ease-in-out infinite;
+}
+
+.sheet--mapped .sheet-head,
+.sheet--mapped .sheet-foot {
+  opacity: 0.45;
+}
+
+.sheet-lines {
+  position: absolute;
+  top: 22px;
+  left: 7px;
+  right: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sheet-lines span {
+  height: 2px;
+  border-radius: 1px;
+  background: var(--text-secondary);
+  transform-origin: left;
+  animation: sheet-type 4s steps(8, end) infinite;
+}
+
+.sheet-lines span:nth-child(1) { width: 100%; animation-delay: 0s; }
+.sheet-lines span:nth-child(2) { width: 88%; animation-delay: 0.5s; }
+.sheet-lines span:nth-child(3) { width: 95%; animation-delay: 1s; }
+.sheet-lines span:nth-child(4) { width: 45%; animation-delay: 1.5s; }
+
+.sheet-badge {
+  position: absolute;
+  right: -12px;
+  bottom: -7px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.sheet-title {
   font-size: 13px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: var(--text);
 }
 
-.flow-sub {
+.sheet-title::before {
+  content: counter(sheet) ". ";
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.sheet-sub {
   font-size: 12px;
   color: var(--text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.flow-link {
-  position: relative;
-  flex: 0 0 28px;
-  height: 0;
-  border-top: 1.5px dashed var(--border-strong);
+@keyframes sheet-breathe {
+  50% { background: rgba(196, 92, 38, 0.16); }
 }
 
-.flow-pulse {
-  position: absolute;
-  top: -3.75px;
-  left: 0;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: flow-travel 2.4s ease-in-out infinite;
-}
-
-.flow-link + .flow-step + .flow-link .flow-pulse {
-  animation-delay: 1.2s;
-}
-
-@keyframes flow-travel {
-  0% { left: 0; opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { left: calc(100% - 6px); opacity: 0; }
+@keyframes sheet-type {
+  0% { transform: scaleX(0); }
+  35%, 85% { transform: scaleX(1); }
+  100% { transform: scaleX(1); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flow-pulse { animation: none; left: calc(50% - 3px); }
+  .sheet-area,
+  .sheet-lines span { animation: none; }
 }
 
 .dropzone {
@@ -387,7 +456,7 @@ html[data-theme="dark"] .theme-icon--sun { display: block; }
 
 .review-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  grid-template-columns: 1fr;
   gap: 16px;
   align-items: start;
 }
@@ -708,28 +777,6 @@ html[data-theme="dark"] .tip-popover {
 
   .intro {
     padding: 20px;
-  }
-
-  .flow {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .flow-step {
-    flex: none;
-  }
-
-  .flow-link {
-    flex: 0 0 18px;
-    height: 18px;
-    width: 0;
-    margin-left: 27px;
-    border-top: none;
-    border-left: 1.5px dashed var(--border-strong);
-  }
-
-  .flow-pulse {
-    display: none;
   }
 
   .dropzone-inner {
