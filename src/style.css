@@ -15,6 +15,7 @@
   --accent-hover: #a84d1f;
   --progress-track: #ebebe7;
   --danger: #b42318;
+  --dot: rgba(26, 26, 26, 0.08);
 }
 
 html[data-theme="dark"] {
@@ -30,6 +31,7 @@ html[data-theme="dark"] {
   --accent-hover: #f09058;
   --progress-track: #2e2e2e;
   --danger: #f97066;
+  --dot: rgba(255, 255, 255, 0.06);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,6 +46,19 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  isolation: isolate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--dot) 1px, transparent 1.5px);
+  background-size: 12px 12px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 40%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 40%, #000 100%);
 }
 
 code {
