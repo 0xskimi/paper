@@ -6,6 +6,9 @@
   <title>Paper</title>
   <meta name="description" content="Turn a designed letterhead into a usable Word template. Artwork stays faithful. Body stays editable.">
   <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="/src/style.css">
   <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
   <script>
@@ -13,7 +16,7 @@
       const stored = localStorage.getItem('paper-theme');
       const theme = stored === 'light' || stored === 'dark'
         ? stored
-        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        : 'dark';
       document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
@@ -34,9 +37,44 @@
 
   <main class="stage">
     <header class="intro" id="intro">
-      <h1 class="headline">Turn letterhead into a Word template.</h1>
-      <p class="subhead">Drop in a designed PDF or PNG. Paper keeps the artwork exact and leaves a clean typing area — then gives you a real <code>.dotx</code> you can open in Word.</p>
+      <span class="tag"><span class="tag-arrow" aria-hidden="true"></span>Letterhead to .dotx</span>
+      <h1 class="headline"><span class="dim">Paper turns</span> designed letterhead <span class="dim">into a Word template you can actually type in.</span></h1>
     </header>
+
+    <div class="flow" aria-hidden="true">
+      <div class="flow-peek flow-peek--left"></div>
+      <div class="flow-board">
+        <div class="flow-col">
+          <label class="pill pill--green flow-pill" for="file-input">Drop PDF</label>
+          <span class="flow-arrow flow-arrow--down"></span>
+          <div class="node">
+            <p class="node-title">Letterhead</p>
+            <p class="node-sub">PDF or PNG</p>
+          </div>
+        </div>
+        <div class="flow-link">
+          <svg class="flow-curve" viewBox="0 0 200 160" preserveAspectRatio="none">
+            <path d="M4 136 H40 C 90 136, 90 24, 150 24 H192" />
+          </svg>
+          <span class="flow-start"></span>
+          <span class="flow-head"></span>
+          <span class="chip"><span class="chip-dot"></span>Artwork kept</span>
+        </div>
+        <div class="flow-col">
+          <div class="node">
+            <p class="node-title">Template</p>
+            <p class="node-sub">.dotx and .docx</p>
+          </div>
+          <span class="flow-arrow flow-arrow--down"></span>
+          <span class="pill pill--green flow-pill">Open in Word</span>
+        </div>
+      </div>
+      <div class="flow-peek flow-peek--right">
+        <span class="peek-check"></span>
+        <span class="peek-line"></span>
+        <span class="pill pill--green peek-pill">Type</span>
+      </div>
+    </div>
 
     <section class="workspace" id="workspace">
       <div id="upload-panel">
@@ -48,6 +86,7 @@
             </span>
             <p class="dropzone-title">Drop letterhead here</p>
             <p class="dropzone-sub">PDF or PNG · A4 or Letter</p>
+            <span class="pill pill--green dropzone-btn">Choose file</span>
             <p class="dropzone-note">Up to 25MB</p>
           </div>
         </label>

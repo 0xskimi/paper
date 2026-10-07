@@ -106,7 +106,8 @@ function sleep(ms: number) {
 function renderProcessSteps(activeIndex: number, doneThrough: number) {
   processSteps.innerHTML = PROCESS_LABELS.map((label, index) => {
     const state = index < doneThrough ? 'is-done' : index === activeIndex ? 'is-active' : '';
-    return `<li class="step ${state}"><span class="step-dot"></span><span>${label}</span></li>`;
+    const status = state === 'is-done' ? 'Done' : state === 'is-active' ? 'Working' : 'Waiting';
+    return `<li class="step ${state}"><span class="step-dot"></span><span class="step-label">${label}</span><span class="step-status">${status}</span></li>`;
   }).join('');
 }
 
