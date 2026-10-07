@@ -118,51 +118,17 @@ html[data-theme="dark"] .theme-icon--sun { display: block; }
 .intro {
   background: var(--surface-muted);
   border-radius: var(--radius);
-  padding: 24px 28px;
+  padding: 16px;
   margin-bottom: 16px;
 }
 
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 12px 5px 9px;
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--text);
-  margin-bottom: 16px;
-}
-
-.tag-icon {
-  width: 16px;
-  height: 16px;
-  color: var(--accent);
-}
-
-.tag-text {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.headline {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin-bottom: 8px;
-  line-height: 1.25;
-}
-
-.headline .dim {
-  color: var(--text-muted);
-}
-
-.subhead {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.55;
-  max-width: 54ch;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 /* How it works strip */
@@ -171,7 +137,6 @@ html[data-theme="dark"] .theme-icon--sun { display: block; }
   list-style: none;
   display: flex;
   align-items: center;
-  margin-top: 20px;
 }
 
 .flow-step {
@@ -722,10 +687,6 @@ html[data-theme="dark"] .tip-popover {
 
   .intro {
     padding: 20px;
-  }
-
-  .headline {
-    font-size: 22px;
   }
 
   .flow {
