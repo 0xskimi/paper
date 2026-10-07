@@ -118,17 +118,22 @@ html[data-theme="dark"] .theme-icon--sun { display: block; }
 .intro {
   background: var(--surface-muted);
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 24px 28px;
   margin-bottom: 16px;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
+.headline {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.subhead {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.55;
 }
 
 /* How it works strip */
@@ -137,6 +142,7 @@ html[data-theme="dark"] .theme-icon--sun { display: block; }
   list-style: none;
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
 }
 
 .flow-step {
